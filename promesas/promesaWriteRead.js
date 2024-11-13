@@ -14,22 +14,22 @@ let person2 = {
 
 // Con then y catch 
 
-// fs.writeFile ("person.json", JSON.stringify(person1))
-// .then (()=>{
-//     console.log("Fichero creado");
-//     return fs.readFile ("person.json","utf-8");
-// })
-// .then ((dato) => {
-//     console.log ("Fichero leido");
-//     console.log (dato);
-// })
-// .catch ((error)=>{
-//     console.log ("Hay un error");
-//     console.log (error);
-// }
-// )
+fs.writeFile ("person.json", JSON.stringify(person1))
+.then (()=>{
+    console.log("Fichero creado");
+    return fs.readFile ("person.json","utf-8");
+})
+.then ((dato) => {
+    console.log ("Fichero leido");
+    console.log (dato);
+})
+.catch ((error)=>{
+    console.log ("Hay un error");
+    console.log (error);
+}
+)
 
-// Con async
+// Con async await
 
 async function writeAndRead(){
     try{
@@ -41,8 +41,8 @@ async function writeAndRead(){
     }
     catch (error){
         console.log("Hay un error");
+        console.log(error);
     }
-
 }
 
 writeAndRead();
