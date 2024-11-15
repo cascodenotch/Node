@@ -3,18 +3,17 @@ const Book = require('../models/Book');
 let arrayBooks = [];
 let bookInstance = null; 
 
-function getAllBooks(request, response)
-{
+function getAllBooks(request, response){
     let respuesta;
     if (arrayBooks.length > 0) 
-        respuesta = arrayBooks;
+        respuesta = { error: false, codigo: 200, data: arrayBooks }; 
     else
-        respuesta = {error: true, codigo: 200, mensaje: "No hay libros"}
+        respuesta = {error: true, codigo: 404, mensaje: "No hay libros"}
     
     response.send(respuesta);   
 };
 
-function addBook(request, response) {   
+function addBook(request, response){   
     let respuesta; 
     let bookId = request.body.id_book;
     let bookExists = false;  
@@ -26,8 +25,9 @@ function addBook(request, response) {
     });
 
     if (bookExists) {
-        respuesta = { error: true, codigo: 200, mensaje: 'Libro ya existe' };
-    } else { bookInstance = new Book(
+        respuesta = { error: true, codigo: 404, mensaje: 'Libro ya existe' };
+    } 
+    else { bookInstance = new Book(
             request.body.id_book, 
             request.body.id_user,
             request.body.title,
@@ -37,10 +37,93 @@ function addBook(request, response) {
         );
         
         arrayBooks.push(bookInstance);
+        console.log('Nuevo libro:', bookInstance);
         respuesta = { error: false, codigo: 200, mensaje: 'Libro añadido', data: arrayBooks };
     }
 
     response.send(respuesta); 
 }
 
-module.exports = {getAllBooks, addBook};
+function updateBook(request, response) {
+    let respuesta;
+    let bookId = request.body.id_book;
+    let bookExists = false;
+
+    arrayBooks.forEach(book => {
+        if (book.id_book === bookId) {
+            bookExists = true;
+        
+            book.id_user = request.body.id_user;
+            book.title = request.body.title;
+            book.author = request.body.author;
+            book.price = request.body.price;
+            book.photo = request.body.photo;
+
+            respuesta = { error: false, codigo: 200, mensaje: 'Libro actualizado', data: book 
+            };
+        }
+    });
+
+    if (!bookExists) {
+        respuesta = { error: true, codigo: 404,mensaje: 'No existe ese Id' 
+        };
+    }
+    response.send(respuesta);
+}
+
+function deleteBook (request, response){
+    let respuesta;
+    let bookId = request.body.id_book;
+    let bookExists = false;  
+
+    arrayBooks.forEach(book => {
+        if (book.id_book === bookId) {
+            bookExists = true;
+        }
+    });
+    
+    if (bookExists){
+    let arrayFiltrado = arrayBooks.filter(book => (book.id_book != bookId))
+    arrayBooks = arrayFiltrado;
+    respuesta = {error: false,codigo: 200, mensaje: 'Libro eliminado'
+    };
+    }
+
+    else {
+        respuesta = {
+            error: true,
+            codigo: 404,
+            mensaje: 'No se encontró un libro con ese id'
+        };
+    }
+    response.send(respuesta);
+}
+
+function getOneBook(request, response){
+
+    console.log ("end point funciona")
+    let respuesta;
+    let bookId = parseInt(request.params.id);
+    let bookExists = false;  
+
+    arrayBooks.forEach(book => {
+        if (book.id_book === bookId) {
+            bookExists = true;
+        }
+    });
+    
+    if (bookExists){
+    let book = arrayBooks.find(book => (book.id_book == bookId))
+    respuesta = { error: false, codigo: 200, data: book }; 
+    }
+
+    else {respuesta = {
+            error: true,
+            codigo: 404,
+            mensaje: 'No se encontró un libro con ese id'
+        };
+    }
+    response.send(respuesta);
+}
+
+module.exports = {getAllBooks, addBook, updateBook, deleteBook, getOneBook};
