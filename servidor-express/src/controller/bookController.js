@@ -1,4 +1,4 @@
-const Book = require('/models/Book');
+const Book = require('../models/Book');
 
 let bookInstance = null;
 
@@ -28,7 +28,7 @@ function createBook(request, response)
         )
         
         respuesta   = {error: false, codigo: 200, 
-                        mensaje: 'Libro creado',data: usuario};
+                        mensaje: 'Libro creado',data: bookInstance};
     }
     else
         respuesta = {error: true, codigo: 200, 
@@ -50,11 +50,11 @@ function updateBook(request, response)
         bookInstance.photo = request.body.photo,
     
         respuesta  = {error: false, codigo: 200, 
-                        mensaje: 'Libro actualizado',data: usuario};
+                        mensaje: 'Libro actualizado',data: bookInstance};
     }
     else
         respuesta = {error: true, codigo: 200, 
-                        mensaje: 'El libro no existe',data: usuario};
+                        mensaje: 'El libro no existe',data: bookInstance};
 
     response.send(respuesta);
 };
@@ -66,11 +66,11 @@ function deleteBook(request, response)
     {    
         bookInstance     = null;
         respuesta   = {error: false, codigo: 200, 
-                        mensaje: 'Libro borrado',data: usuario};
+                        mensaje: 'Libro borrado',data: bookInstance};
     }  
     else
         respuesta   = {error: true, codigo: 200, 
-                        mensaje: 'El usuario no existe',data: usuario};
+                        mensaje: 'El libro no existe',data: bookInstance};
 
     response.send(respuesta);
 };

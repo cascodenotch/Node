@@ -1,6 +1,6 @@
 const express = require('express');
 const router = express.Router();
-const bookController = require('../controllers/bookController');
+const bookController = require('../controller/bookController');
 
 // Define los endpoints y asigna el controlador correspondiente
 router.get('/book', bookController.getBook);
