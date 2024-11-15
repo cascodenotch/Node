@@ -42,7 +42,7 @@ function updateBook(request, response)
     let respuesta
     if (bookInstance !=  null)
     {
-        bookInstance.id_user  = request.body.id_user;
+        bookInstance.id_book = request.body.id_book;
         bookInstance.id_user = request.body.id_user,
         bookInstance.title = request.body.title,
         bookInstance.author = request.body.author, 
