@@ -103,7 +103,7 @@ function getOneBook(request, response){
 
     console.log ("end point funciona")
     let respuesta;
-    let bookId = parseInt(request.params.id);
+    let bookId = parseInt(request.params.id_book);
     let bookExists = false;  
 
     arrayBooks.forEach(book => {
