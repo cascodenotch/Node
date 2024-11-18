@@ -85,8 +85,7 @@ function deleteBook (request, response){
     if (bookExists){
     let arrayFiltrado = arrayBooks.filter(book => (book.id_book != bookId))
     arrayBooks = arrayFiltrado;
-    respuesta = {error: false,codigo: 200, mensaje: 'Libro eliminado'
-    };
+    respuesta = {error: false,codigo: 200, mensaje: 'Libro eliminado', data:arrayBooks};
     }
 
     else {
@@ -114,7 +113,7 @@ function getOneBook(request, response){
     
     if (bookExists){
     let book = arrayBooks.find(book => (book.id_book == bookId))
-    respuesta = { error: false, codigo: 200, data: book }; 
+    respuesta = {error: false, codigo: 200, data: book}; 
     }
 
     else {respuesta = {
