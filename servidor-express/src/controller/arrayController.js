@@ -48,6 +48,7 @@ function updateBook(request, response) {
     let respuesta;
     let bookId = request.body.id_book;
     let bookExists = false;
+    console.log(request.body);
 
     arrayBooks.forEach(book => {
         if (book.id_book === bookId) {
@@ -98,30 +99,22 @@ function deleteBook (request, response){
     response.send(respuesta);
 }
 
-function getOneBook(request, response){
-
-    console.log ("end point funciona")
+function getOneBook(request, response) {
+    console.log("end point funciona");
     let respuesta;
     let bookId = parseInt(request.params.id_book);
-    let bookExists = false;  
+    let book = arrayBooks.find(book => book.id_book === bookId);
 
-    arrayBooks.forEach(book => {
-        if (book.id_book === bookId) {
-            bookExists = true;
-        }
-    });
-    
-    if (bookExists){
-    let book = arrayBooks.find(book => (book.id_book == bookId))
-    respuesta = {error: false, codigo: 200, data: book}; 
-    }
-
-    else {respuesta = {
+    if (book) {
+        respuesta = { error: false, codigo: 200, data: book };
+    } else {
+        respuesta = {
             error: true,
             codigo: 404,
             mensaje: 'No se encontró un libro con ese id'
         };
     }
+
     response.send(respuesta);
 }
 

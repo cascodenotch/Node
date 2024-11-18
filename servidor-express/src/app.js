@@ -28,9 +28,9 @@ app.get("/bye", (req, res) => {
     res.status(200).json({ ok: true, message: "Adios!" });
 });
 
-app.use('/api', bookRoutes);
+app.use(bookRoutes);
 
-app.use('/api/v2', booksRoutes);
+app.use(booksRoutes);
 
 app.use(errorHandling);
 
