@@ -62,11 +62,11 @@ function updateBook(request, response) {
         if (book.id_book === bookId) {
             bookExists = true;
         
-            book.id_user = request.body.id_user;
-            book.title = request.body.title;
-            book.author = request.body.author;
-            book.price = request.body.price;
-            book.photo = request.body.photo;
+            book.id_user = book.id_user ? request.body.id_user : book.id_user;
+            book.title = book.title? request.body.title : book.title;
+            book.author = book.author? request.body.author : book.author;
+            book.price = book.price? request.body.price : book.price;
+            book.photo = book.photo? request.body.photo : book.photo;
 
             respuesta = { error: false, codigo: 200, mensaje: 'Libro actualizado', data: book};
         }
