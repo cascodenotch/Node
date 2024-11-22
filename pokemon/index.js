@@ -1,11 +1,17 @@
 async function buscarPokemon() {
     
-    let pokemonBuscado = document.getElementById("name").value;
+    let pokemonBuscado = document.getElementById("name").value.toLowerCase();
+
     let url = `https://pokeapi.co/api/v2/pokemon/${pokemonBuscado}`;
+
+    if (pokemonBuscado === "") {
+        document.getElementById("datosApi").innerHTML = `<p style="color: red;">¡Ups! Parece que no escribiste nada.<br> <br> Por favor, escribe el nombre de un Pokémon para buscarlo</p>`;
+        return;
+    }
 
     try {
         let response = await fetch(url);
-        if (!response.ok) throw new Error("Pokémon no encontrado");
+        if (!response.ok) throw new Error("No encontramos ese Pokémon. <br> <br> Verifica el nombre e inténtalo nuevamente.");
 
         let data = await response.json();
         
@@ -23,6 +29,6 @@ async function buscarPokemon() {
         }
 
     catch (error) {
-        document.getElementById("datosApi").innerHTML = `<p style="color: red;">Error: ${error.message}</p>`;
+        document.getElementById("datosApi").innerHTML = `<p style="color: red;">${error.message}</p>`;
     }
 }

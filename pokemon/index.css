@@ -51,6 +51,11 @@ form{
     height: 50%;
 }
 
+img{
+    height: 300px;
+    width: 300px;
+}
+
 input{
     width: 200px;
     height: 30px;
