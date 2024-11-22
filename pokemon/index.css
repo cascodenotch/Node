@@ -8,26 +8,61 @@
 }
 
 header{
-    background-color: black;
+    background-color: #EF5350;
     color: white;
-    height: 8vh;
+    height: 6vh;
     display: block;
     align-content: center;
     text-align: center;
 }
 
 .contenedor-principal {
-    background-color: grey;
+    background-color: white;
     color: black;
-    min-height: 92vh;
-    display: block;
-    align-content: center;
+    min-height: 94vh;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
     text-align: center;
 }
 
-.datosApi{
-    border: 2px solid red !important;
+form{
+    background-color: #FACA1B;
+    width: 50%;
+    height: 94vh;
     display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+.espacio {
+    margin-bottom: 20px;
+}
+
+#datosApi{
+    display: flex;
+    flex-direction: column;
     margin-top: 30px;
     gap: 10px;
+    align-items: center;
+    width: 50%;
+    height: 50%;
+}
+
+input{
+    width: 200px;
+    height: 30px;
+}
+
+button{
+    border: transparent;
+    border-radius: 1cm;
+    width: 200px;
+    padding: 10px;
+}
+
+button:hover{
+    background-color:#EF5350 ;
 }
